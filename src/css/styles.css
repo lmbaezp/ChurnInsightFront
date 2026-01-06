@@ -1,0 +1,50 @@
+body {
+  box-sizing: border-box;
+}
+
+
+/* =================== LOGIN =================== */
+
+.login-bg {
+  min-height: 100vh;
+  /* background: linear-gradient(
+    to bottom,
+    #3369ae 0%,
+    #3369ae 20%,
+    rgba(51, 105, 174, 0.8) 40%,
+    rgba(51, 105, 174, 0.6) 60%,
+    rgba(51, 105, 174, 0.4) 80%,
+    rgba(51, 105, 174, 0.3) 100%
+  ); */
+  background: #3369ae;
+}
+
+.img-login {
+  width: 40%;
+  max-width: 160px;
+  min-width: 90px;
+  height: auto;
+}
+
+.form-control {
+  box-sizing: border-box;
+}
+
+/* =================== DASHBOARD =================== */
+
+#header-dashboard{
+    background: #3369ae;
+}
+
+.dropdown-menu {
+    --bs-dropdown-link-hover-bg: #0a58ca ;
+    --bs-dropdown-link-hover-color: #fff ;
+} 
+
+#card-title-data {
+    color: #3369ae;
+}
+
+#card-title-pred {
+    background: #3369ae;
+}

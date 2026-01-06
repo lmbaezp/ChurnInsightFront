@@ -1,0 +1,32 @@
+<header id="header-dashboard" class="d-flex justify-content-center align-items-center py-2 mx-0 vw-100">
+    <img src="/src/public/img/blanco_bgazul.png" alt="Logo" width="30" height="30"
+        class="d-inline-block align-text-top">
+    <p class="text-white fw-bold fs-5 fs-md-3 ms-3 my-0">ChurnInsight</p>
+    <p class="text-white my-0 ms-4 ps-4 fs-6 fs-md-4 d-none d-md-block border-start">Predicción de
+        cancelación de clientes</p>
+</header>
+
+<nav id="navbar-dashboard" class="shadow py-2">
+    <div class="d-flex justify-content-between align-items-center ms-1">
+        <div class="d-flex">
+            <a href="/src/views/home_dash.html" class="btn btn-primary mx-1" tabindex="-1" role="button"
+                aria-disabled="true">Resumen</a>
+            <div class="dropdown mx-1">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Predicciones
+                </button>
+                <ul id="options" class="dropdown-menu bg-primary">
+                    <li><a class="dropdown-item text-white" href="/src/views/pred_single.html">Individual</a></li>
+                    <li><a class="dropdown-item text-white" href="#">Grupo</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex align-items-center me-2">
+            <p class="my-0 mx-1 fw-bold">NOMBRE USUARIO</p>
+            <button class="btn btn-outline-primary px-2" role="button" aria-disabled="true" onclick="logOut()">
+                <i class="fw-bold bi bi-box-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</nav>
