@@ -30,9 +30,13 @@ body {
   box-sizing: border-box;
 }
 
+.text-footer {
+  color: #3369ae;
+}
+
 /* =================== DASHBOARD =================== */
 
-#header-dashboard{
+#header-dashboard, #footer-dashboard{
     background: #3369ae;
 }
 
