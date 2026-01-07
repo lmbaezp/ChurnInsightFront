@@ -15,7 +15,7 @@
 
 </head>
 
-<body>
+<body id="unautAccess" class="d-flex flex-column justify-content-between min-vh-100">
 
     <div id="header-navbar"> </div>
 
@@ -30,45 +30,45 @@
                             <div class="py-3 border-bottom row">
                                 <label for="antiguedad" class="col-md-6 col-form-label">Antigüedad (meses): </label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" id="antiguedad" min="0" max="120"
+                                    <input type="number" class="form-control" name="antiguedad" min="0" max="120"
                                         required>
-                                    <div id="antiguedadError">
+                                    <div id="antiguedadError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
                                 <label for="plan" class="col-md-6 col-form-label">Plan: </label>
                                 <div class="col-md-6">
-                                    <select id="plan" class="form-select">
+                                    <select name="plan" class="form-select">
                                         <option selected value="0">Seleccione una opción</option>
                                         <option value="basico">Básico</option>
                                         <option value="estandar">Estándar</option>
                                         <option value="premium">Premium</option>
                                     </select>
-                                    <div id="planError">
+                                    <div id="planError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
                                 <label for="metodoPago" class="col-md-6 col-form-label">Método de pago: </label>
                                 <div class="col-md-6">
-                                    <select id="metodoPago" class="form-select">
+                                    <select name="metodoPago" class="form-select">
                                         <option selected value="0">Seleccione una opción</option>
                                         <option value="efectivo">Efectivo</option>
                                         <option value="transferencia_bancaria">Transferencia Bancaria</option>
                                         <option value="tarjeta_credito">Tarjeta Crédito</option>
                                         <option value="tarjeta_debito">Tarjeta Débito</option>
                                     </select>
-                                    <div id="metodoPagoError">
+                                    <div id="metodoPagoError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
                                 <label for="factImpagas" class="col-md-6 col-form-label">Facturas impagas: </label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" id="factImpagas" min="0" max="10"
+                                    <input type="number" class="form-control" name="factImpagas" min="0" max="10"
                                         required>
-                                    <div id="factImpagasError">
+                                    <div id="factImpagasError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
@@ -76,8 +76,8 @@
                                 <label for="frecUso" class="col-md-6 col-form-label">Frecuencias de uso (días/mes):
                                 </label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" id="frecUso" min="0" max="30" required>
-                                    <div id="frecUsoError">
+                                    <input type="number" class="form-control" name="frecUso" min="0" max="30" required>
+                                    <div id="frecUsoError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
@@ -85,21 +85,21 @@
                                 <label for="ticketsSoporte" class="col-md-6 col-form-label">Tickets de soporte abiertos:
                                 </label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" id="ticketsSoporte" min="0" max="50"
+                                    <input type="number" class="form-control" name="ticketsSoporte" min="0" max="50"
                                         required>
-                                    <div id="ticketsSoporteError">
+                                    <div id="ticketsSoporteError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
                                 <label for="tipoContrato" class="col-md-6 col-form-label">Tipo de contrato: </label>
                                 <div class="col-md-6">
-                                    <select id="tipoContrato" class="form-select">
+                                    <select name="tipoContrato" class="form-select">
                                         <option selected value="0">Seleccione una opción</option>
                                         <option value="mensual">Mensual</option>
                                         <option value="anual">Anual</option>
                                     </select>
-                                    <div id="tipoContratoError">
+                                    <div id="tipoContratoError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
@@ -107,8 +107,9 @@
                                 <label for="cambiosPlan" class="col-md-6 col-form-label">Cambios de plan últimos 6
                                     meses: </label>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" id="cambiosPlan" min="0" max="5" required>
-                                    <div id="cambiosPlanError">
+                                    <input type="number" class="form-control" name="cambiosPlan" min="0" max="5"
+                                        required>
+                                    <div id="cambiosPlanError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
@@ -116,17 +117,19 @@
                                 <label for="canalAdquisicion" class="col-md-6 col-form-label">Canal de adquisición:
                                 </label>
                                 <div class="col-md-6">
-                                    <select id="canalAdquisicion" class="form-select">
+                                    <select name="canalAdquisicion" class="form-select">
                                         <option selected value="0">Seleccione una opción</option>
                                         <option value="call_center">Call center</option>
                                         <option value="redes_sociales">Redes sociales</option>
                                         <option value="referido">Referido</option>
                                         <option value="web">Web</option>
                                     </select>
-                                    <div id="canalAdquisicionError">
+                                    <div id="canalAdquisicionError" class="errorMsg">
                                     </div>
                                 </div>
                             </div>
+                            <button type="submit" id="btn-calculate"
+                                class="btn btn-primary w-100 mt-3 fw-bold">CALCULAR</button>
                         </form>
                     </div>
                 </div>
@@ -164,10 +167,13 @@
 
     </main>
 
+    <div id="footer"></div>
+
     <script src="/src/js/loadComponent.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="/src/js/homeDash.js"></script>
+    <script src="/src/js/api.js"></script>
+    <script src="/src/js/predSingle.js"></script>
 
 </body>
