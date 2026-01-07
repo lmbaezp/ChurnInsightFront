@@ -10,6 +10,24 @@ function getAuthToken() {
     return token;
 }
 
+// Validación inicial del token
+if (!getAuthToken()) {
+    const content = document.getElementById("unautAccess");
+    if (content) {
+        content.innerHTML = '';
+        content.classList.add('d-flex', 'flex-column', 'justify-content-center', 'align-items-center');
+        content.innerHTML = `
+            <h3 class="mt-5">ACCESO NO AUTORIZADO</h3>
+            <div class="spinner-border" role="status">
+            <span class="visually-hidden">Cargando...</span>
+            </div>
+            `
+        setTimeout(() => {
+            window.location.href = '/index.html';
+        }, 1000);
+    }
+}
+
 // =========================== AUTENTICACIÓN ===============================
 
 // Register
@@ -58,3 +76,14 @@ async function login(credentials) {
         throw new Error('No se pudo conectar con el servidor');
     }
 }
+
+// Logout
+
+function logOut() {
+    localStorage.removeItem('jwt');
+    window.location.href = '/index.html';
+}
+
+// =========================== PREDICCIÓN ===============================
+
+// Individual
