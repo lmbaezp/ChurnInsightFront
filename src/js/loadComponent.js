@@ -5,5 +5,5 @@ function loadComponent(id, url) {
 }
 
 loadComponent('header-navbar', '/src/views/header_navbar.html');
-// loadComponent('footer', '/src/views/footer.html'); 
+loadComponent('footer', '/src/views/footer.html'); 
 
