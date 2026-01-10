@@ -2,12 +2,19 @@
 const API_BASE_URL = 'http://localhost:8080/api';
 
 // =================== AUXILIARES ===================
+function getCurrentUser() {
+    return JSON.parse(localStorage.getItem("CURRENT_USER"));
+}
 
-// Función auxiliar para obtener el token
 function getAuthToken() {
-    const token = localStorage.getItem('jwt');
-    if (!token) return null;
-    return token;
+    const user = getCurrentUser();
+    return user?.jwt || null;
+}
+
+function getUserName() {
+    const user = getCurrentUser();
+    if (!user || !user.user) return null;
+    return user.user.trim().toUpperCase();
 }
 
 // Validación inicial del token
@@ -15,6 +22,7 @@ if (!getAuthToken()) {
     const content = document.getElementById("unautAccess");
     if (content) {
         content.innerHTML = '';
+        content.className = '';
         content.classList.add('d-flex', 'flex-column', 'justify-content-center', 'align-items-center');
         content.innerHTML = `
             <h3 class="mt-5">ACCESO NO AUTORIZADO</h3>
@@ -80,7 +88,7 @@ async function login(credentials) {
 // Logout
 
 function logOut() {
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('CURRENT_USER');
     window.location.href = '/index.html';
 }
 
