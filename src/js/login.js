@@ -15,14 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    // Helpers de localStorage
-    const LS_KEYS = { USERS: 'users', CURRENT: 'currentUser' }; // claves
-    const getUsers = () => JSON.parse(localStorage.getItem(LS_KEYS.USERS) || '[]');
-    const saveUsers = (users) => localStorage.setItem(LS_KEYS.USERS, JSON.stringify(users));
-    const setCurrentUser = (u) => localStorage.setItem(LS_KEYS.CURRENT, JSON.stringify({ name: u.name, rol: u.rol }));
-    const getCurrentUser = () => JSON.parse(localStorage.getItem(LS_KEYS.CURRENT) || 'null');
-    const clearCurrentUser = () => localStorage.removeItem(LS_KEYS.CURRENT);
-
     const formLogin = document.getElementById('form-login');
 
     formLogin?.addEventListener('submit', async (e) => {
@@ -58,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (hasError) return;
 
-        const current = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        const current = JSON.parse(localStorage.getItem('CURRENT_USER') || 'null');
         if (current) {
             Swal.fire({
                 title: 'Hay una sesión activa',
@@ -82,8 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                const token = data.token;
-                localStorage.setItem('jwt', token);
+                const currentUser = {
+                    user: data.usuario,
+                    jwt: data.token
+                };
+                localStorage.setItem("CURRENT_USER", JSON.stringify(currentUser));
+
                 Swal.fire({
                     icon: 'success',
                     title: `Bienvenido`,
