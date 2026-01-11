@@ -119,6 +119,19 @@ formSinglePred?.addEventListener('submit', async (e) => {
 
             const probabilidad = Math.round(data.probabilidadChurn * 100);
 
+            let riesgoClienteTexto;
+            let riesgoClienteBg;
+            if (data.probabilidadChurn < 3) {
+                riesgoClienteTexto = 'Bajo';
+                riesgoClienteBg = 'bg-success'
+            } else if (data.probabilidadChurn >= 0.3 && probabilidad <= 0.7) {
+                riesgoClienteTexto = 'Medio';
+                riesgoClienteBg = 'bg-warning'
+            } else {
+                riesgoClienteTexto = 'Alto';
+                riesgoClienteBg = 'bg-danger'
+            }
+
             function formatearNombre(nombre) {
                 return nombre
                     .replace(/_/g, " ")
@@ -191,6 +204,14 @@ formSinglePred?.addEventListener('submit', async (e) => {
                                             <div class="border-bottom mb-3 p-2">
                                                 <p class="card-text fst-italic m-0">Probabilidad de churn:</p>
                                                 <p class="fs-1 text fst-italic text-center m-0"> ${probabilidad}% </p>
+                                            </div>
+                                            <div class="border-bottom mb-3 p-2">
+                                                <p class="card-text fst-italic m-0">Nivel de riesgo:</p>
+                                                <h4 class="fs-1 text fst-italic text-center m-0  px-3 py-1">
+                                                    <span class="badge ${riesgoClienteBg}">
+                                                        ${riesgoClienteTexto}
+                                                    </span>
+                                                </h4>
                                             </div>
                                         </div>
                                     </div>
