@@ -121,7 +121,7 @@ formSinglePred?.addEventListener('submit', async (e) => {
 
             let riesgoClienteTexto;
             let riesgoClienteBg;
-            if (data.probabilidadChurn < 3) {
+            if (data.probabilidadChurn < 0.3) {
                 riesgoClienteTexto = 'Bajo';
                 riesgoClienteBg = 'bg-success'
             } else if (data.probabilidadChurn >= 0.3 && probabilidad <= 0.7) {
