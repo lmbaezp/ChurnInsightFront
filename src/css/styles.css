@@ -45,7 +45,7 @@ body {
     --bs-dropdown-link-hover-color: #fff ;
 } 
 
-#card-title-data {
+.card-title-data {
     color: #3369ae;
 }
 
