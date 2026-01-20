@@ -9,13 +9,14 @@ function loadComponent(id, url, callback) {
 }
 
 function renderUserName() {
-    const userNameElement = document.getElementById("userName");
-    if (!userNameElement) return;
+  const userNameElement = document.getElementById("userName");
+  if (!userNameElement) return;
 
-    const user = JSON.parse(localStorage.getItem("CURRENT_USER"));
-    if (user?.user) {
-        userNameElement.textContent = user.user.toUpperCase();
-    }
+  const user = getUserName();
+
+  if (user) {
+    userNameElement.textContent = user.toUpperCase();
+  }
 }
 
 // Cargar componentes con callback
