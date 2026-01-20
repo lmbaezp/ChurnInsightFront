@@ -20,54 +20,166 @@
     <div id="header-navbar"> </div>
 
     <main>
-        <div class="row container mx-auto mt-5">
-            <div class="col-md-4 mb-3">
-                <div class="card shadow-lg p-1 border-left">
-                    <div class="card-body">
-                        <p class="card-title-data card-title mb-4">Número de predicciones realizadas</p>
-                        <h1 class="text-center mb-4">120</h1>
-                        <p class="text-center mb-0">Desde 10-01-2026</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3 mb-md-0">
-                <div class="card shadow-lg p-1 border-left">
-                    <div class="card-body row m-0">
-                        <div class="col-6">
-                            <p class="card-title-data card-title mb-4">Umbral </p>
-                            <h1 class="text-center mb-4">21.9%</h1>
+        <div id="filtrosSmall" class="container mt-4 d-none">
+            <div class="accordion" id="accordionFiltros">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h3 class="text-center fw-bold">Filtrar por:</h3>
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show divFiltros"
+                        data-bs-parent="#accordionExampleFiltros">
+                        <div class="accordion-body">
+                            <form id="filtros-admin-small" novalidate>
+                                <div class="pb-3 border-bottom mb-3">
+                                    <label for="usuario">
+                                        <h5>Usuario</h5>
+                                    </label>
+                                    <select id="usuario-small" name="usuario" class="usuario form-select">
+                                        <option value="0">Seleccione</option>
+                                    </select>
+                                </div>
+                                <div class="pb-3 border-bottom mb-4">
+                                    <h5>Fecha</h5>
+                                    <label for="fechaInicio">
+                                        <h6>Desde:</h6>
+                                    </label>
+                                    <input type="date" class="form-control fechaInicio" id="fechaInicioSmall"
+                                        name="fechaInicio">
+                                    <label for="fechaFin" class="mt-3">
+                                        <h6>Hasta:</h6>
+                                    </label>
+                                    <input type="date" class="form-control fechaFin" id="fechaFinSmall" name="fechaFin">
+                                </div>
+                                <button type="submit" id="btn-filtrar-small"
+                                    class="submitFiltros btn btn-primary w-100 mt-2 fw-bold">APLICAR</button>
+                            </form>
+                            <button type="button" id="btn-cleanFiltros"
+                                class="cleanFiltros btn btn-success w-100 mt-3 fw-bold">LIMPIAR FILTROS
+                            </button>
                         </div>
-                        <div class="col-6">
-                            <p class="card-title-data card-title mb-4">Recall</p>
-                            <h1 class="text-center mb-4">80,1%</h1>
-                        </div>
-                        <p class="text-center m-0">Algoritmo: XGBoost + Calibrated ClassifierCV</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card shadow-lg p-1 border-left">
-                    <div class="card-body">
-                        <p class="card-title-data card-title mb-4">Probabilidad promedio de churn</p>
-                        <h1 class="text-center mb-4">11%</h1>
-                        <p class="text-center mb-0">Valor mímimo: 8% - Valor máximo: 15%</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row container mx-auto mt-5">
-            <div class="col-6">
-                <canvas id="myChart" class="h-75"></canvas>
-            </div>
-            <div class="col-6">
-                <canvas id="myChart2" class="h-75"></canvas>
+        <div class="container w-100">
+            <div class="row">
+                <!-- Filtros -->
+                <div id="filtros" class="divFiltros container col-3 mt-4 d-none shadow-lg">
+                    <h3 class="text-center fw-bold border-bottom pb-3 mt-3 mb-5">Filtrar por:</h3>
+                    <form id="filtros-admin" novalidate>
+                        <div class="pb-3 border-bottom mb-4">
+                            <label for="usuario">
+                                <h5>Usuario</h5>
+                            </label>
+                            <select id="usuario-big" name="usuario" class="usuario form-select">
+                                <option value="0">Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="pb-3 border-bottom mb-4">
+                            <h5>Fecha</h5>
+                            <label for="fechaInicio">
+                                <h6>Desde:</h6>
+                            </label>
+                            <input type="date" class="form-control fechaInicio" id="fechaInicioBig" name="fechaInicio">
+                            <label for="fechaFin" class="mt-3">
+                                <h6>Hasta:</h6>
+                            </label>
+                            <input type="date" class="form-control fechaFin" id="fechaFinBig" name="fechaFin">
+                        </div>
+                        <button type="submit" id="btn-filtrar"
+                            class="submitFiltros btn btn-primary w-100 mt-3 fw-bold">APLICAR
+                        </button>
+                    </form>
+                    <button type="btn" id="btn-cleanFiltros"
+                        class="cleanFiltros btn btn-success w-100 mt-3 fw-bold">LIMPIAR FILTROS
+                    </button>
+                </div>
+                <!-- Contenido -->
+                <div id="renderContenido" class="col-12 col-md-9 mt-4 mx-auto">
+                    <div class="container">
+                        <p id="valoresFiltro" class="d-none text-center fw-semibold"></p>
+                        <div class="row g-3">
+                            <!-- Columna izquierda: Cards informativas -->
+                            <div id="cards-datos" class="col-12 col-lg-4 d-flex flex-column justify-content-between">
+                                <!-- Card 1: Número de predicciones -->
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body text-center d-flex flex-column justify-content-between">
+                                        <h6 class="card-title text-primary mb-3">Número de predicciones realizadas</h6>
+                                        <h1 id="numPred" class="display-3 fw-bold mb-3"></h1>
+                                        <p id="fechaPred" class="text-muted mb-0"></p>
+                                    </div>
+                                </div>
+                                <!-- Card 2: Métricas para admin -->
+                                <div id="card-metricas" class="card shadow-sm mt-3 d-none">
+                                    <div class="card-body">
+                                        <div class="row text-center mb-3">
+                                            <div class="col-6 border-end">
+                                                <h6 class="text-primary mb-2">Umbral</h6>
+                                                <h4 class="fw-bold">21,9%</h4>
+                                            </div>
+                                            <div class="col-6">
+                                                <h6 class="text-primary mb-2">Recall</h6>
+                                                <h4 class="fw-bold">80,1%</h4>
+                                            </div>
+                                        </div>
+                                        <div class="text-center pt-3 border-top">
+                                            <p class="mb-0 small text-muted">Algoritmo: XGBoost + Calibrated
+                                                ClassifierCV</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Columna derecha: Gráfico Gauge -->
+                            <div class="col-12 col-lg-8">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body d-flex flex-column">
+                                        <h6 class="card-title text-primary text-center mb-3">Probabilidad promedio de
+                                            churn
+                                        </h6>
+                                        <!-- Contenedor del gauge -->
+                                        <div id="gauge" class="flex-grow-1"></div>
+                                        <!-- Información adicional -->
+                                        <div class="text-center mt-3 pt-3 border-top">
+                                            <p id="minMaxProb" class="mb-0 text-muted"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos de pie y bar -->
+                    <div class="row container mx-auto mt-3 g-3 p-0">
+                        <div class="col-12 col-md-6">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h6 class="text-center text-muted mb-3">Distribución de predicciones</h6>
+                                    <div style="position: relative; height: 350px;">
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <h6 class="text-center text-muted mb-3">Riesgo de predicciones</h6>
+                                    <div style="position: relative; height: 350px;">
+                                        <canvas id="myChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-
-
-
     </main>
 
     <div id="footer"></div>
@@ -77,66 +189,12 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="/src/js/api.js"></script>
+    <script type="module" src="/src/js/homeDash.js"></script>
+    <script type="module" src="/src/js/exportUtils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.4.0/justgage.min.js"></script>
 
 
-    <script>
-        const ctx = document.getElementById('myChart');
-        const ctx2 = document.getElementById('myChart2');
-
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: [
-                    'Cancelará',
-                    'No cancelará',
-                    'Error en predicción'
-                ],
-                datasets: [{
-                    data: [40, 150, 10],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        '#4bc0c0',
-                        'rgb(54, 162, 235)',
-                    ],
-                    hoverOffset: 4
-                }]
-            }
-        })
-
-        new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: [
-                    'Alto',
-                    'Medio',
-                    'Bajo'
-                ],
-                datasets: [{
-                    label: '',
-                    data: [10, 80, 30],
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        '#ffcd56',
-                        '#4bc0c0',
-                    ],
-                    hoverOffset: 4
-                }]
-            },
-            options: {
-                elements: {
-                    bar: {
-                        borderWidth: 2,
-                    }
-                },
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: 'Riesgo de predicciones'
-                    }
-                }
-            },
-        });
-    </script>
 </body>
