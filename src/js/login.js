@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 const currentUser = {
-                    user: data.usuario,
                     jwt: data.token
                 };
                 localStorage.setItem("CURRENT_USER", JSON.stringify(currentUser));
