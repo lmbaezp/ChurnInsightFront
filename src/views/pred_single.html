@@ -24,20 +24,28 @@
             <div class="col-12 col-lg-6 mb-3">
                 <div class="card shadow-lg p-3">
                     <div class="card-body">
-                        <h5 class="card-title-data card-title fs-4 pb-3 border-bottom">Ingrese datos del cliente
+                        <h5 id="title-card-pred" class="card-title-data card-title fs-4 pb-3 border-bottom">Ingrese
+                            datos del cliente
                         </h5>
                         <form id="form-single-pred" novalidate>
+                            <p class="fw-light fst-italic text-center my-2">Todos los campos marcados con asterisco
+                                (<span class="text-danger">*</span>) son obligatorios</p>
                             <div class="py-3 border-bottom row">
-                                <label for="antiguedad" class="col-md-6 col-form-label">Antigüedad (meses): </label>
+                                <label for="antiguedad" class="col-md-6 col-form-label">Antigüedad (meses):
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control" name="antiguedad" min="0" max="120"
                                         required>
-                                    <div id="antiguedadError" class="errorMsg">
+                                    <div id="antiguedadHelp" class="helpMsg form-text ms-1">El valor debe estar entre 0
+                                        y 120
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
-                                <label for="plan" class="col-md-6 col-form-label">Plan: </label>
+                                <label for="plan" class="col-md-6 col-form-label">Plan:
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <select name="plan" class="form-select">
                                         <option selected value="0">Seleccione una opción</option>
@@ -50,7 +58,9 @@
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
-                                <label for="metodoPago" class="col-md-6 col-form-label">Método de pago: </label>
+                                <label for="metodoPago" class="col-md-6 col-form-label">Método de pago:
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <select name="metodoPago" class="form-select">
                                         <option selected value="0">Seleccione una opción</option>
@@ -63,38 +73,47 @@
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
-                                <label for="facturasImpagas" class="col-md-6 col-form-label">Facturas impagas: </label>
+                                <label for="facturasImpagas" class="col-md-6 col-form-label">Facturas impagas:
+                                    <span class="text-danger">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control" name="facturasImpagas" min="0" max="10"
                                         required>
-                                    <div id="facturasImpagasError" class="errorMsg">
+                                    <div id="facturasImpagasHelp" class="helpMsg form-text ms-1">El valor debe estar
+                                        entre 0 y
+                                        10
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
                                 <label for="frecuenciaUso" class="col-md-6 col-form-label">Frecuencias de uso
-                                    (días/mes):
+                                    (días/mes): <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control" name="frecuenciaUso" min="0" max="30"
                                         required>
-                                    <div id="frecuenciaUsoError" class="errorMsg">
+                                    <div id="frecuenciaUsoHelp" class="helpMsg form-text ms-1">El valor debe estar entre
+                                        0 y 30
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
                                 <label for="ticketsSoporte" class="col-md-6 col-form-label">Tickets de soporte
-                                    abiertos:
+                                    abiertos: <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control" name="ticketsSoporte" min="0" max="50"
                                         required>
-                                    <div id="ticketsSoporteError" class="errorMsg">
+                                    <div id="ticketsSoporteHelp" class="helpMsg form-text ms-1">El valor debe estar
+                                        entre 0 y
+                                        50
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
-                                <label for="tipoContrato" class="col-md-6 col-form-label">Tipo de contrato: </label>
+                                <label for="tipoContrato" class="col-md-6 col-form-label">Tipo de contrato: <span
+                                        class="text-danger">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <select name="tipoContrato" class="form-select">
                                         <option selected value="0">Seleccione una opción</option>
@@ -107,16 +126,19 @@
                             </div>
                             <div class="py-3 border-bottom row">
                                 <label for="cambiosPlan" class="col-md-6 col-form-label">Cambios de plan últimos 6
-                                    meses: </label>
+                                    meses: <span class="text-danger">*</span>
+                                </label>
                                 <div class="col-md-6">
                                     <input type="number" class="form-control" name="cambiosPlan" min="0" max="5"
                                         required>
-                                    <div id="cambiosPlanError" class="errorMsg">
+                                    <div id="cambiosPlanHelp" class="helpMsg form-text ms-1">El valor debe estar entre 0
+                                        y 5
                                     </div>
                                 </div>
                             </div>
                             <div class="py-3 border-bottom row">
                                 <label for="canalAdquisicion" class="col-md-6 col-form-label">Canal de adquisición:
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="col-md-6">
                                     <select name="canalAdquisicion" class="form-select">
@@ -124,6 +146,7 @@
                                         <option value="redes_sociales">Redes sociales</option>
                                         <option value="referido">Referido</option>
                                         <option value="web">Web</option>
+                                        <option value="publicidad">Publicidad</option>
                                     </select>
                                     <div id="canalAdquisicionError" class="errorMsg">
                                     </div>
@@ -152,6 +175,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/src/js/api.js"></script>
-    <script src="/src/js/predSingle.js"></script>
+    <script type="module" src="/src/js/predictionUtils.js"></script>
+    <script type="module" src="/src/js/predSingle.js"></script>
 
 </body>
