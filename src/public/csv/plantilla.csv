@@ -1,0 +1,5 @@
+antiguedad,plan,metodoPago,facturasImpagas,frecuenciaUso,ticketsSoporte,tipoContrato,cambiosPlan,canalAdquisicion
+100,basico,tarjeta_debito,1,30,2,mensual,0,web
+50,estandar,tarjeta_credito,0,20,0,mensual,0,web
+60,estandar,tarjeta_debito,0,30,0,mensual,0,redes_sociales
+110,basico,transferencia_bancaria,1,28,0,anual,1,referido
