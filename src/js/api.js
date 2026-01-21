@@ -2,7 +2,7 @@
 
 // =================== CONFIGURACIÓN ===================
 // const API_BASE_URL = 'http://127.0.0.1:8080';
-const API_BASE_URL = 'https://backend-churninsight-app-1.onrender.com/'
+const API_BASE_URL = 'https://backend-churninsight-app-1.onrender.com'
 
 const ENDPOINTS = {
     // Auth
