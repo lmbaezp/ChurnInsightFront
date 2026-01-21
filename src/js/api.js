@@ -8,12 +8,13 @@ const ENDPOINTS = {
     // Auth
     login: '/auth/login',
     register: '/auth/register',
-    
+
     // Logs
     logs: '/logs',
     logsByUser: (username) => `/logs/user/${username}`,
-    logsFilter: (username) => `/logs/filter/fecha/${username}`,
-    
+    logsFilterByFechaUser: (username) => `/logs/filter/fecha/${username}`,
+    logsFilterByFecha: () => '/logs',
+
     // Usuarios
     usuarios: '/usuarios'
 };
@@ -61,9 +62,9 @@ function getUserName() {
 
     const token = getValidAuthToken();
     if (!token) return null;
-    
+
     const decodedToken = decodeJWT(token);
-    cachedUser = decodedToken.sub; 
+    cachedUser = decodedToken.sub;
 
     return cachedUser?.trim().toUpperCase();
 }
@@ -219,7 +220,7 @@ function requireAuth(requiredRole = null) {
 
 async function fetchAPI(endpoint, options = {}) {
     const token = getValidAuthToken();
-    
+
     const defaultOptions = {
         headers: {
             "Content-Type": "application/json",
@@ -314,8 +315,18 @@ async function obtenerLogsPorUsuario(username) {
     return await fetchAPI(ENDPOINTS.logsByUser(username), { method: 'GET' });
 }
 
-async function filtrarLogsPorFecha(username, fechaDesde, fechaHasta) {
-    return await fetchAPI(ENDPOINTS.logsFilter(username), {
+async function filtrarLogs(username, fechaDesde, fechaHasta) {
+    if (username === '0') {
+        return await fetchAPI(ENDPOINTS.logsFilterByFecha(), {
+        method: 'POST',
+        body: JSON.stringify({
+            fechaDesde: `${fechaDesde}T00:00:00Z`,
+            fechaHasta: `${fechaHasta}T23:59:59Z`
+        })
+    });
+    }
+
+    return await fetchAPI(ENDPOINTS.logsFilterByFechaUser(username), {
         method: 'POST',
         body: JSON.stringify({
             fechaDesde: `${fechaDesde}T00:00:00Z`,

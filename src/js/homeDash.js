@@ -54,7 +54,7 @@ function sincronizarCampos(origenId, destinoId) {
 
     if (!origen || !destino) return;
 
-    origen.addEventListener('change', function() {
+    origen.addEventListener('change', function () {
         destino.value = this.value;
     });
 }
@@ -86,12 +86,12 @@ function inicializarFechas(fechaInicio, fechaFin, min, max) {
 
 function configurarValidacionFechas(fechaInicio) {
     fechaInicio.forEach(f => {
-        f.addEventListener('change', function() {
+        f.addEventListener('change', function () {
             const fechaInicioValor = this.value;
 
             if (fechaInicioValor) {
                 const fechaFinElement = f.nextElementSibling?.nextElementSibling;
-                
+
                 if (fechaFinElement) {
                     fechaFinElement.setAttribute('min', fechaInicioValor);
 
@@ -114,7 +114,7 @@ function calcularMetricas(predicciones) {
 
     const { sinError, conError } = separarPorError(predicciones);
     const prediccionesOrdenadas = ordenarPorFecha(predicciones);
-    
+
     const estadisticas = calcularEstadisticas(sinError);
 
     return {
@@ -149,7 +149,7 @@ function separarPorError(predicciones) {
 }
 
 function ordenarPorFecha(predicciones) {
-    return [...predicciones].sort((a, b) => 
+    return [...predicciones].sort((a, b) =>
         new Date(a.timestamp) - new Date(b.timestamp)
     );
 }
@@ -222,8 +222,8 @@ function calcularEstadisticas(prediccionesSinError) {
 
 function datosComunes(datos) {
     numPred.textContent = datos.totalPredicciones;
-    fechaPred.textContent = datos.fechaPrimerPrediccion 
-        ? `Desde ${datos.fechaPrimerPrediccion.split("T")[0]}` 
+    fechaPred.textContent = datos.fechaPrimerPrediccion
+        ? `Desde ${datos.fechaPrimerPrediccion.split("T")[0]}`
         : 'Sin datos';
 
     valorActualGauge = Math.round(datos.probabilidadChurnPromedio * 100);
@@ -352,9 +352,9 @@ function inicializarGraficoBar(alto, medio, bajo) {
 
 // Resize handler para gauge
 let resizeTimer;
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() {
+    resizeTimer = setTimeout(function () {
         if (gaugeChurn && valorActualGauge !== 0) {
             inicializarGauge(valorActualGauge);
         }
@@ -398,9 +398,9 @@ async function inicializarDashboardAdmin() {
             datosComunes(data);
 
             select.forEach(s => s.value = '0');
-            
-            const minFecha = data.fechaPrimerPrediccion 
-                ? data.fechaPrimerPrediccion.split('T')[0] 
+
+            const minFecha = data.fechaPrimerPrediccion
+                ? data.fechaPrimerPrediccion.split('T')[0]
                 : hoy;
             inicializarFechas(fechaInicio, fechaFin, minFecha, hoy);
 
@@ -427,7 +427,7 @@ async function inicializarDashboardAdmin() {
 async function cargarUsuarios(selectElements) {
     try {
         const usuarios = await obtenerUsuarios();
-        
+
         usuarios.forEach(u => {
             selectElements.forEach(s => {
                 const option = document.createElement("option");
@@ -461,13 +461,8 @@ function configurarFormularioFiltros(form, valoresFiltro, cleanFiltros) {
             return;
         }
 
-        if (usuario.value === '0') {
-            mostrarError('Debe seleccionar un usuario');
-            return;
-        }
-
         try {
-            const data = await filtrarLogsPorFecha(
+            const data = await filtrarLogs(
                 usuario.value,
                 fechaIniForm.value,
                 fechaFinForm.value
@@ -476,8 +471,8 @@ function configurarFormularioFiltros(form, valoresFiltro, cleanFiltros) {
             // Mostrar valores del filtro
             if (valoresFiltro) {
                 valoresFiltro.classList.remove('d-none');
-                valoresFiltro.textContent = 
-                    `USUARIO: ${usuario.value.toUpperCase()} - ` +
+                valoresFiltro.textContent =
+                    `USUARIO: ${usuario.value !== '0' ? usuario.value.toUpperCase() : 'TODOS'} - ` +
                     `FECHA INICIO: ${fechaIniForm.value} - ` +
                     `FECHA FIN: ${fechaFinForm.value}`;
             }
@@ -492,7 +487,7 @@ function configurarFormularioFiltros(form, valoresFiltro, cleanFiltros) {
             });
 
             // Agregar botón de descarga
-            agregarBotonDescarga(data, usuario.value, fechaIniForm.value, fechaFinForm.value);
+            agregarBotonDescarga(data, usuario.value !== 0 ? usuario.value : 'TODOS', fechaIniForm.value, fechaFinForm.value);
 
         } catch (error) {
             console.error('Error aplicando filtros:', error);
