@@ -50,7 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (hasError) return;
 
-        const current = JSON.parse(localStorage.getItem('CURRENT_USER') || 'null'); 
+        let current = JSON.parse(localStorage.getItem('CURRENT_USER') || 'null'); 
+        if (current) {
+            localStorage.removeItem('CURRENT_USER');
+        }
 
         login({ usuario, password })
             .then(data => {
