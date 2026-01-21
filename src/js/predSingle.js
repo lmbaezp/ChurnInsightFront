@@ -30,8 +30,8 @@ formSinglePred?.addEventListener('submit', async (e) => {
     const token = getValidAuthToken();
 
     try {
-        // const response = await fetch('http://backend-churninsight-app-1.onrender.com/api/v1/predict', {
-        const response = await fetch("http://127.0.0.1:8080/api/v1/predict", {
+        const response = await fetch('https://backend-churninsight-app-1.onrender.com/api/v1/predict', {
+        // const response = await fetch("http://127.0.0.1:8080/api/v1/predict", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
