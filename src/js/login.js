@@ -50,18 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (hasError) return;
 
-        const current = JSON.parse(localStorage.getItem('CURRENT_USER') || 'null');
-        if (current) {
-            Swal.fire({
-                title: 'Hay una sesión activa',
-                icon: 'error',
-                timer: 1500,
-                showConfirmButton: false
-            }).then(() => {
-                window.location.href = '/index.html'
-            });
-            return
-        }
+        const current = JSON.parse(localStorage.getItem('CURRENT_USER') || 'null'); 
 
         login({ usuario, password })
             .then(data => {
