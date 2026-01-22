@@ -66,7 +66,7 @@ function getUserName() {
     const decodedToken = decodeJWT(token);
     cachedUser = decodedToken.sub;
 
-    return cachedUser?.trim().toUpperCase();
+    return cachedUser?.trim();
 }
 
 function getUserRol() {
