@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let current = JSON.parse(localStorage.getItem('CURRENT_USER') || 'null'); 
         if (current) {
-            localStorage.removeItem('CURRENT_USER');
+            window.location.href = '/src/views/home_dash.html';
         }
 
         login({ usuario, password })
