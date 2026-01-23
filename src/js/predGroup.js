@@ -38,7 +38,6 @@ formGroupPred?.addEventListener('submit', async (e) => {
     const token = getValidAuthToken();
 
     try {
-        // const response = await fetch("https://backend-churninsight-app-1.onrender.com/api/v1/batch-predict", {
         const response = await fetch(`${API_BASE_URL}/api/v1/batch-predict`, {
             method: "POST",
             headers: {
@@ -60,6 +59,8 @@ formGroupPred?.addEventListener('submit', async (e) => {
 
         datosPredicciones = data;
 
+        fileInputHelp.textContent = 'El archivo debe ser CSV';
+        fileInput.value = '';
         mostrarResultados(data, resultContainer);
 
     } catch (err) {
@@ -74,6 +75,8 @@ function validarArchivo(file, fileInput, fileInputHelp) {
     if (!file) {
         fileInput.classList.add('border', 'border-danger');
         fileInput.focus();
+        fileInputHelp.classList.add('text-danger');
+        fileInputHelp.textContent = 'Debe cargar un archivo';
         return false;
     }
 
@@ -132,6 +135,15 @@ function mostrarResultados(data, resultContainer) {
     }
 
     inicializarSwiper();
+
+    resultContainer.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+    
+    setTimeout(() => {
+        resultContainer.focus({ preventScroll: true });
+    }, 300);
 }
 
 /**
