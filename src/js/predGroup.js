@@ -23,7 +23,7 @@ formGroupPred?.addEventListener('submit', async (e) => {
 
     // Limpiar estados previos
     resultContainer.innerHTML = '';
-    fileInput.classList.remove('border', 'border-danger');
+    fileInput.classList.remove('border', 'border-danger', 'border-2');
     fileInputHelp.classList.remove('text-danger');
 
     // Validaciones
@@ -73,7 +73,7 @@ formGroupPred?.addEventListener('submit', async (e) => {
  */
 function validarArchivo(file, fileInput, fileInputHelp) {
     if (!file) {
-        fileInput.classList.add('border', 'border-danger');
+        fileInput.classList.add('border', 'border-danger', 'border-2');
         fileInput.focus();
         fileInputHelp.classList.add('text-danger');
         fileInputHelp.textContent = 'Debe cargar un archivo';
