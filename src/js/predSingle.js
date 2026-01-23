@@ -19,7 +19,7 @@ formSinglePred?.addEventListener('submit', async (e) => {
     const selects = formSinglePred.querySelectorAll("select");
 
     const validacion = validarFormulario(inputs, selects);
-    
+
     if (!validacion.esValido) {
         manejarErrorValidacion(validacion.primerError);
         return;
@@ -51,6 +51,13 @@ formSinglePred?.addEventListener('submit', async (e) => {
             return;
         }
 
+        inputs.forEach(input => {
+            input.value = '';
+        });
+        selects.forEach(select => {
+            select.value = '0';
+        });
+
         mostrarResultado(data, resultContainer);
 
     } catch (err) {
@@ -64,7 +71,7 @@ formSinglePred?.addEventListener('submit', async (e) => {
 function limpiarErrores() {
     document.querySelectorAll(".errorMsg").forEach(e => e.innerHTML = '');
     document.querySelectorAll(".helpMsg").forEach(e => e.classList.remove('text-danger'));
-    
+
     const campos = formSinglePred.querySelectorAll("input[type='number'], select");
     campos.forEach(e => e.classList.remove('border', 'border-danger'));
 }
@@ -154,8 +161,8 @@ function manejarErrorValidacion(elemento) {
  */
 function construirBodyRequest(inputs, selects) {
     return [...inputs, ...selects].reduce((acc, field) => {
-        acc[field.name] = field.type === 'number' 
-            ? Number(field.value) 
+        acc[field.name] = field.type === 'number'
+            ? Number(field.value)
             : field.value;
         return acc;
     }, {});
@@ -167,4 +174,15 @@ function construirBodyRequest(inputs, selects) {
 function mostrarResultado(data, resultContainer) {
     const cardHTML = generarCardPrediccion(data, '-single');
     resultContainer.innerHTML = cardHTML;
+    
+    const focus = document.getElementById('header-dashboard');
+
+    focus.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+    
+    setTimeout(() => {
+        focus.focus({ preventScroll: true });
+    }, 300);
 }
