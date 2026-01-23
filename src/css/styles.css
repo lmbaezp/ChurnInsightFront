@@ -105,3 +105,21 @@ body, html {
   color: #fff;
   background: #007aff;
 }
+
+/* =================== Fix para SweetAlert2 - Prevenir saltos del footer =================== */
+
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    padding-right: 0 !important;
+    overflow: auto !important;
+}
+
+html.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    overflow: auto !important;
+}
+
+/* Asegurar posicionamiento del footer */
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
