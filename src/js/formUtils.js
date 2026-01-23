@@ -176,6 +176,7 @@ export function mostrarExito(mensaje, callback = null) {
         title: mensaje,
         showConfirmButton: false,
         timer: 1500,
+        heightAuto: false,
         didOpen: () => {
             // Evitar que SweetAlert añada padding al body
             document.body.style.paddingRight = '0px';
@@ -197,6 +198,7 @@ export function mostrarError(titulo, mensaje) {
         icon: 'error',
         title: titulo,
         text: mensaje,
+        heightAuto: false,
         didOpen: () => {
             document.body.style.paddingRight = '0px';
         },
@@ -218,6 +220,7 @@ export function mostrarInfo(titulo, mensaje, duracion = 2000) {
         position: 'top-end',
         showConfirmButton: false,
         timer: duracion,
+        heightAuto: false,
         didOpen: () => {
             document.body.style.paddingRight = '0px';
         },
