@@ -87,7 +87,7 @@ export function generarCardPrediccion(data, uniqueId = '') {
     return `
         <div class="card shadow-lg">
             <div class="card-body p-0">
-                <h5 class="card-title-pred card-title p-3 text-white fs-4">
+                <h5 id="card-title-pred" class="card-title-pred card-title p-3 text-white fs-4">
                     Resultado de la predicción
                 </h5>
 
@@ -116,7 +116,7 @@ export function generarCardPrediccion(data, uniqueId = '') {
                                         <p class="fs-1 fst-italic text-center m-0">${probabilidad}%</p>
                                     </div>
                                     <div class="border-bottom mb-3 p-2">
-                                        <p class="card-text fst-italic m-0">Nivel de riesgo:</p>
+                                        <p id="nivel-riesgo" class="card-text fst-italic m-0">Nivel de riesgo:</p>
                                         <h4 class="fs-1 fst-italic text-center m-0 px-3 py-1">
                                             <span class="badge ${riesgoCliente.clase}">
                                                 ${riesgoCliente.texto}
