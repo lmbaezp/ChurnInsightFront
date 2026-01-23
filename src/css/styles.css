@@ -12,7 +12,7 @@ body, html {
 /* =================== LOGIN =================== */
 
 .login-bg {
-  min-height: 100vh;
+  max-height: 100vh;
   /* background: linear-gradient(
     to bottom,
     #3369ae 0%,
