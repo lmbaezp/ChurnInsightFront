@@ -175,7 +175,15 @@ export function mostrarExito(mensaje, callback = null) {
         icon: 'success',
         title: mensaje,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+        didOpen: () => {
+            // Evitar que SweetAlert añada padding al body
+            document.body.style.paddingRight = '0px';
+        },
+        willClose: () => {
+            // Asegurar que se limpie el padding al cerrar
+            document.body.style.paddingRight = '';
+        }
     }).then(() => {
         if (callback) callback();
     });
@@ -188,7 +196,13 @@ export function mostrarError(titulo, mensaje) {
     Swal.fire({
         icon: 'error',
         title: titulo,
-        text: mensaje
+        text: mensaje,
+        didOpen: () => {
+            document.body.style.paddingRight = '0px';
+        },
+        willClose: () => {
+            document.body.style.paddingRight = '';
+        }
     });
 }
 
@@ -203,7 +217,13 @@ export function mostrarInfo(titulo, mensaje, duracion = 2000) {
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: duracion
+        timer: duracion,
+        didOpen: () => {
+            document.body.style.paddingRight = '0px';
+        },
+        willClose: () => {
+            document.body.style.paddingRight = '';
+        }
     });
 }
 
