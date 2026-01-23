@@ -16,56 +16,58 @@
 
 <body class="login-bg d-flex flex-column align-items-center justify-content-between vh-100">
 
-    <div class="container d-flex text-center m-4 justify-content-center align-items-center">
-        <img src="/src/public/img/blanco_bgazul.png" class="img-login" alt="Logo">
-        <p class="ms-4 m-2 fs-1 fw-bold text-white">ChurnInsight</p>
-    </div>
+    <div>
+        <div class="container d-flex text-center m-4 justify-content-center align-items-center">
+            <img src="/src/public/img/blanco_bgazul.png" class="img-login" alt="Logo">
+            <p class="ms-4 m-2 fs-1 fw-bold text-white">ChurnInsight</p>
+        </div>
 
 
-    <div class="mx-4 p-5 shadow-lg card">
-        <h4 class="text-center mb-4">Ingresar credenciales</h4>
+        <div class="mx-4 p-5 shadow-lg card">
+            <h4 class="text-center mb-4">Ingresar credenciales</h4>
 
-        <form id="form-login" novalidate>
-            <div class="col-12 mb-3">
-                <label for="validationCustomUsername" class="form-label">Nombre de usuario
-                    <span class="text-danger">*</span>
-                </label>
-                <div class="input-group has-validation">
-                    <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person"></i></span>
-                    <input id="loginUser" type="text" class="form-control" id="validationCustomUsername"
-                        aria-describedby="inputGroupPrepend" required>
+            <form id="form-login" novalidate>
+                <div class="col-12 mb-3">
+                    <label for="validationCustomUsername" class="form-label">Nombre de usuario
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person"></i></span>
+                        <input id="loginUser" type="text" class="form-control" id="validationCustomUsername"
+                            aria-describedby="inputGroupPrepend" required>
+                    </div>
+                    <div id="loginUserError" class="errorMsg form-text ms-1 text-danger"></div>
                 </div>
-                <div id="loginUserError" class="errorMsg form-text ms-1 text-danger"></div>
-            </div>
 
-            <div class="col-12 mb-3">
-                <label for="loginPass" class="form-label">Contraseña
-                    <span class="text-danger">*</span>
-                </label>
-                <div class="input-group has-validation">
-                    <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock"></i></span>
-                    <input id="loginPass" type="password" class="form-control" required>
-                    <button class="btn btn-outline-secondary" type="button" id="togglePass"
-                        aria-label="Mostrar contraseña">
-                        <i class="bi bi-eye-fill"></i>
-                    </button>
+                <div class="col-12 mb-3">
+                    <label for="loginPass" class="form-label">Contraseña
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock"></i></span>
+                        <input id="loginPass" type="password" class="form-control" required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePass"
+                            aria-label="Mostrar contraseña">
+                            <i class="bi bi-eye-fill"></i>
+                        </button>
+                    </div>
+                    <div id="loginPassError" class="errorMsg form-text ms-1 text-danger"></div>
                 </div>
-                <div id="loginPassError" class="errorMsg form-text ms-1 text-danger"></div>
-            </div>
 
-            <button type="submit" id="btn-sign-in" class="btn btn-primary w-100 mt-3 fw-bold">ACEPTAR</button>
-            <p class="text-center mt-3 mb-0">
-                <a class="icon-link icon-link-hover mx-auto" href="/src/views/signup.html">
-                    Registrarse
-                    <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
-                        <path
-                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-                    </svg>
-                </a>
-            </p>
-        </form>
+                <button type="submit" id="btn-sign-in" class="btn btn-primary w-100 mt-3 fw-bold">ACEPTAR</button>
+                <p class="text-center mt-3 mb-0">
+                    <a class="icon-link icon-link-hover mx-auto" href="/src/views/signup.html">
+                        Registrarse
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+                            <path
+                                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                        </svg>
+                    </a>
+                </p>
+            </form>
+        </div>
     </div>
-
+    
     <footer id="footer-log"
         class="d-flex justify-content-around align-items-center p-3 mx-0 mt-5 vw-100 bg-white shadow">
         <p class="text-footer my-0 d-none d-md-block fw-bold">Transformando datos en decisiones
@@ -81,5 +83,5 @@
     <script type="module" src="/src/js/formUtils.js"></script>
     <script src="/src/js/api.js"></script>
     <script type="module" src="/src/js/auth.js"></script>
-    
+
 </body>
