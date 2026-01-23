@@ -26,57 +26,63 @@
         <h4 class="text-center mb-4">Registro de usuario</h4>
 
         <form id="form-signup" novalidate>
+            <p class="fw-light fst-italic text-center text-secondary">Todos los campos marcados con asterisco
+                (<span class="text-danger">*</span>) son obligatorios</p>
             <div class="col-12 mb-3">
-                <label for="nombreUsuario" class="form-label">Nombre de usuario</label>
+                <label for="user" class="form-label">Nombre de usuario
+                    <span class="text-danger">*</span>
+                </label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control" id="nombreUsuario" aria-describedby="inputGroupPrepend"
+                    <input type="text" class="form-control" id="user" aria-describedby="inputGroupPrepend"
                         required>
                 </div>
-                <div id="userNameInfo" class="form-text">4-8 letras o números</div>
-                <div id="userError">
-                </div>
+                <div id="userInfo" class="form-text ms-1">De 4 a 8 letras o números</div>
+                <div id="userError" class="form-text errorMsg ms-1 text-danger"></div>
             </div>
 
             <div class="col-12 mb-3">
-                <label for="emailUsuario" class="form-label">Email</label>
+                <label for="email" class="form-label">Email
+                    <span class="text-danger">*</span>
+                </label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-envelope"></i></span>
-                    <input type="email" class="form-control" id="emailUsuario" aria-describedby="inputGroupPrepend"
+                    <input type="email" class="form-control" id="email" aria-describedby="inputGroupPrepend"
                         required>
                 </div>
-                <div id="emailError">
-                </div>
+                <div id="emailError" class="errorMsg form-text ms-1 text-danger"></div>
             </div>
 
             <div class="col-12 mb-3">
-                <label for="contrasena" class="form-label">Contraseña</label>
+                <label for="pass1" class="form-label">Contraseña
+                    <span class="text-danger">*</span>
+                </label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock"></i></span>
-                    <input id="loginPass" type="password" class="form-control" id="contrasena" required>
+                    <input id="pass1" type="password" class="form-control" required>
                     <button class="btn btn-outline-secondary" type="button" id="togglePass"
                         aria-label="Mostrar contraseña">
                         <i class="bi bi-eye-fill"></i>
                     </button>
                 </div>
-                <div id="passInfo" class="form-text">6 caracteres: mayúscula, una minúscula, un número y un caracter
+                <div id="pass1Info" class="form-text ms-1">6 caracteres: mayúscula, una minúscula, un número y un caracter
                     especial</div>
-                <div id="passError">
-                </div>
+                <div id="pass1Error" class="errorMsg form-text ms-1 text-danger"></div>
             </div>
 
             <div class="col-12 mb-3">
-                <label for="contrasena2" class="form-label">Escribe nuevamente la contraseña</label>
+                <label for="pass2" class="form-label">Escribe nuevamente la contraseña
+                    <span class="text-danger">*</span>
+                </label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock"></i></span>
-                    <input id="signupPass2" type="password" class="form-control" id="contrasena2" required>
+                    <input type="password" class="form-control" id="pass2" required>
                     <button class="btn btn-outline-secondary" type="button" id="togglePass2"
                         aria-label="Mostrar contraseña">
                         <i class="bi bi-eye-fill"></i>
                     </button>
                 </div>
-                <div id="pass2Error">
-                </div>
+                <div id="pass2Error" class="errorMsg form-text ms-1 text-danger"></div>
             </div>
 
             <button id="btn-sign-in" class="btn btn-primary w-100 mt-3 fw-bold">ACEPTAR</button>
@@ -104,6 +110,8 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/src/js/formUtils.js"></script>
     <script src="/src/js/api.js"></script>
-    <script src="/src/js/login.js"></script>
+    <script type="module" src="/src/js/auth.js"></script>
+    
 </body>
