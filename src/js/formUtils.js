@@ -7,7 +7,7 @@
  */
 export function limpiarErrorInput(input) {
     const errorDiv = document.getElementById(`${input.id}Error`);
-    input.classList.remove('border', 'border-danger');
+    input.classList.remove('border', 'border-danger', 'border-2');
     if (errorDiv) {
         errorDiv.textContent = '';
     }
@@ -18,7 +18,7 @@ export function limpiarErrorInput(input) {
  */
 export function mostrarErrorInput(input, mensaje) {
     const errorDiv = document.getElementById(`${input.id}Error`);
-    input.classList.add('border', 'border-danger');
+    input.classList.add('border', 'border-danger', 'border-2');
     if (errorDiv) {
         errorDiv.textContent = mensaje;
     }
@@ -28,7 +28,7 @@ export function mostrarErrorInput(input, mensaje) {
  * Marca un campo con error (versión genérica)
  */
 export function marcarCampoConError(elemento, mensaje = null, divHelp = null) {
-    elemento.classList.add('border', 'border-danger');
+    elemento.classList.add('border', 'border-danger', 'border-2');
     
     if (divHelp) {
         divHelp.classList.add('text-danger');
@@ -55,7 +55,7 @@ export function limpiarTodosErrores(formulario) {
     
     // Limpiar bordes rojos
     const campos = formulario.querySelectorAll('input, select, textarea');
-    campos.forEach(e => e.classList.remove('border', 'border-danger'));
+    campos.forEach(e => e.classList.remove('border', 'border-danger', 'border-2'));
 }
 
 // =================== NAVEGACIÓN Y FOCUS ===================
