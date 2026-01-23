@@ -27,28 +27,30 @@
 
         <form id="form-login" novalidate>
             <div class="col-12 mb-3">
-                <label for="validationCustomUsername" class="form-label">Nombre de usuario</label>
+                <label for="validationCustomUsername" class="form-label">Nombre de usuario
+                    <span class="text-danger">*</span>
+                </label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person"></i></span>
                     <input id="loginUser" type="text" class="form-control" id="validationCustomUsername"
                         aria-describedby="inputGroupPrepend" required>
                 </div>
-                <div id="userError">
-                </div>
+                <div id="loginUserError" class="errorMsg form-text ms-1 text-danger"></div>
             </div>
 
             <div class="col-12 mb-3">
-                <label for="validationCustom02" class="form-label">Contraseña</label>
+                <label for="loginPass" class="form-label">Contraseña
+                    <span class="text-danger">*</span>
+                </label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-lock"></i></span>
-                    <input id="loginPass" type="password" class="form-control" id="validationCustom02" required>
+                    <input id="loginPass" type="password" class="form-control" required>
                     <button class="btn btn-outline-secondary" type="button" id="togglePass"
                         aria-label="Mostrar contraseña">
                         <i class="bi bi-eye-fill"></i>
                     </button>
                 </div>
-                <div id="passError">
-                </div>
+                <div id="loginPassError" class="errorMsg form-text ms-1 text-danger"></div>
             </div>
 
             <button type="submit" id="btn-sign-in" class="btn btn-primary w-100 mt-3 fw-bold">ACEPTAR</button>
@@ -64,11 +66,11 @@
         </form>
     </div>
 
-    <footer id="footer-log" class="d-flex justify-content-around align-items-center p-3 mx-0 mt-5 vw-100 bg-white shadow">
+    <footer id="footer-log"
+        class="d-flex justify-content-around align-items-center p-3 mx-0 mt-5 vw-100 bg-white shadow">
         <p class="text-footer my-0 d-none d-md-block fw-bold">Transformando datos en decisiones
             de retención</p>
-        <img src="/src/public/img/azul_bgblanco.png" alt="Logo" width="30" height="30"
-        class="d-none d-md-block">
+        <img src="/src/public/img/azul_bgblanco.png" alt="Logo" width="30" height="30" class="d-none d-md-block">
         <p class="text-footer text-center my-0 fw-bold">Hackathon ONE – No Country 2025 – Equipo 43 </p>
     </footer>
 
@@ -76,6 +78,8 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="/src/js/formUtils.js"></script>
     <script src="/src/js/api.js"></script>
-    <script src="/src/js/login.js"></script>
+    <script type="module" src="/src/js/auth.js"></script>
+    
 </body>
