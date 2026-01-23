@@ -1,125 +1,56 @@
+// Formulario de predicción individual
+import {
+    limpiarTodosErrores,
+    marcarCampoConError,
+    manejarErrorValidacion,
+    validarRangoNumerico,
+    validarSelect,
+    construirObjetoDesdeFormulario,
+    limpiarFormulario,
+    scrollHaciaElemento
+} from './formUtils.js';
+
 import {
     generarCardPrediccion,
     manejarErrorAPI
 } from './predictionUtils.js';
 
-const formSinglePred = document.getElementById('form-single-pred');
+// =================== CONFIGURACIÓN ===================
 
-formSinglePred?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+const REGLAS_VALIDACION = {
+    antiguedad: { min: 0, max: 120 },
+    facturasImpagas: { min: 0, max: 10 },
+    frecuenciaUso: { min: 0, max: 30 },
+    ticketsSoporte: { min: 0, max: 50 },
+    cambiosPlan: { min: 0, max: 5 }
+};
 
-    const resultContainer = document.getElementById('result-single-pred');
-    resultContainer.innerHTML = '';
-
-    // Limpiar errores previos
-    limpiarErrores();
-
-    // Obtener y validar campos
-    const inputs = formSinglePred.querySelectorAll("input[type='number']");
-    const selects = formSinglePred.querySelectorAll("select");
-
-    const validacion = validarFormulario(inputs, selects);
-
-    if (!validacion.esValido) {
-        manejarErrorValidacion(validacion.primerError);
-        return;
-    }
-
-    // Preparar datos
-    const bodyRequest = construirBodyRequest(inputs, selects);
-    const token = getValidAuthToken();
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/predict`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": token ? `Bearer ${token}` : ''
-            },
-            body: JSON.stringify(bodyRequest)
-        });
-
-        const data = await response.json();
-
-        if (data.error) {
-            Swal.fire({
-                icon: "error",
-                title: "Predicción no disponible",
-                text: "Intenta más tarde o contacta a soporte",
-            });
-            return;
-        }
-
-        inputs.forEach(input => {
-            input.value = '';
-        });
-        selects.forEach(select => {
-            select.value = '0';
-        });
-
-        mostrarResultado(data, resultContainer);
-
-    } catch (err) {
-        manejarErrorAPI(err, "predicción individual");
-    }
-});
+// =================== VALIDACIÓN DEL FORMULARIO ===================
 
 /**
- * Limpia todos los mensajes de error
+ * Valida el formulario completo de predicción
  */
-function limpiarErrores() {
-    document.querySelectorAll(".errorMsg").forEach(e => e.innerHTML = '');
-    document.querySelectorAll(".helpMsg").forEach(e => e.classList.remove('text-danger'));
-
-    const campos = formSinglePred.querySelectorAll("input[type='number'], select");
-    campos.forEach(e => e.classList.remove('border', 'border-danger'));
-}
-
-/**
- * Valida el formulario completo
- */
-function validarFormulario(inputs, selects) {
-    const reglas = {
-        antiguedad: { min: 0, max: 120 },
-        facturasImpagas: { min: 0, max: 10 },
-        frecuenciaUso: { min: 0, max: 30 },
-        ticketsSoporte: { min: 0, max: 50 },
-        cambiosPlan: { min: 0, max: 5 }
-    };
-
+function validarFormularioPrediccion(inputs, selects) {
     let primerError = null;
 
     // Validar inputs numéricos
     inputs.forEach(input => {
-        const regla = reglas[input.name];
+        const regla = REGLAS_VALIDACION[input.name];
         if (!regla) return;
 
-        const valor = input.value;
-        const divHelp = document.getElementById(`${input.name}Help`);
-
-        if (valor === '') {
-            marcarError(input);
-            if (!primerError) primerError = input;
-            return;
-        }
-
-        const num = Number(valor);
-        if (num < regla.min || num > regla.max) {
-            marcarError(input, divHelp);
-            if (!primerError) primerError = input;
+        const esValido = validarRangoNumerico(input, regla.min, regla.max);
+        
+        if (!esValido && !primerError) {
+            primerError = input;
         }
     });
 
     // Validar selects
     selects.forEach(select => {
-        const divError = document.getElementById(`${select.name}Error`);
-
-        if (select.value === "0") {
-            marcarError(select);
-            divError.innerHTML = `<p class="text-danger">Debe seleccionar una opción válida</p>`;
-            if (!primerError) primerError = select;
-        } else {
-            divError.innerHTML = '';
+        const esValido = validarSelect(select, '0');
+        
+        if (!esValido && !primerError) {
+            primerError = select;
         }
     });
 
@@ -129,59 +60,84 @@ function validarFormulario(inputs, selects) {
     };
 }
 
-/**
- * Marca un campo con error
- */
-function marcarError(elemento, divHelp = null) {
-    elemento.classList.add('border', 'border-danger');
-    if (divHelp) {
-        divHelp.classList.add('text-danger');
-    }
-}
+// =================== MANEJO DE PREDICCIÓN ===================
 
 /**
- * Maneja el scroll y focus al primer error
+ * Procesa la predicción individual
  */
-function manejarErrorValidacion(elemento) {
-    if (!elemento) return;
-
-    elemento.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
+async function procesarPrediccion(bodyRequest, token) {
+    const response = await fetch(`${API_BASE_URL}/api/v1/predict`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": token ? `Bearer ${token}` : ''
+        },
+        body: JSON.stringify(bodyRequest)
     });
 
-    setTimeout(() => {
-        elemento.focus({ preventScroll: true });
-    }, 300);
-}
+    const data = await response.json();
 
-/**
- * Construye el objeto para enviar a la API
- */
-function construirBodyRequest(inputs, selects) {
-    return [...inputs, ...selects].reduce((acc, field) => {
-        acc[field.name] = field.type === 'number'
-            ? Number(field.value)
-            : field.value;
-        return acc;
-    }, {});
+    if (data.error) {
+        throw new Error('Predicción no disponible. Intenta más tarde o contacta a soporte');
+    }
+
+    return data;
 }
 
 /**
  * Muestra el resultado de la predicción
  */
-function mostrarResultado(data, resultContainer) {
+function mostrarResultadoPrediccion(data, resultContainer) {
     const cardHTML = generarCardPrediccion(data, '-single');
     resultContainer.innerHTML = cardHTML;
-    
-    const focus = document.getElementById('header-dashboard');
-
-    focus.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-    
-    setTimeout(() => {
-        focus.focus({ preventScroll: true });
-    }, 300);
+    scrollHaciaElemento('card-title-pred');
 }
+
+// =================== INICIALIZACIÓN ===================
+
+function inicializarFormularioPrediccion() {
+    const formSinglePred = document.getElementById('form-single-pred');
+    if (!formSinglePred) return;
+
+    const resultContainer = document.getElementById('result-single-pred');
+
+    formSinglePred.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Limpiar resultados y errores previos
+        resultContainer.innerHTML = '';
+        limpiarTodosErrores(formSinglePred);
+
+        // Obtener campos
+        const inputs = formSinglePred.querySelectorAll("input[type='number']");
+        const selects = formSinglePred.querySelectorAll("select");
+
+        // Validar formulario
+        const validacion = validarFormularioPrediccion(inputs, selects);
+
+        if (!validacion.esValido) {
+            manejarErrorValidacion(validacion.primerError);
+            return;
+        }
+
+        // Preparar datos
+        const bodyRequest = construirObjetoDesdeFormulario([...inputs, ...selects]);
+        const token = getValidAuthToken();
+
+        try {
+            // Hacer predicción
+            const data = await procesarPrediccion(bodyRequest, token);
+
+            // Limpiar formulario y mostrar resultado
+            limpiarFormulario(formSinglePred);
+            mostrarResultadoPrediccion(data, resultContainer);
+
+        } catch (error) {
+            console.error('Error en predicción:', error);
+            manejarErrorAPI(error, "predicción individual");
+        }
+    });
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', inicializarFormularioPrediccion);
