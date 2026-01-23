@@ -301,6 +301,19 @@ function inicializarGraficoPie(churn, noChurn, error) {
                             padding: 15,
                             font: { size: 12 }
                         }
+                    },
+                    datalabels: {
+                        color: '#fff',
+                        font: {
+                            weight: 'bold',
+                            size: 14
+                        },
+                        formatter: (value, context) => {
+                            const total = context.chart.data.datasets[0].data
+                                .reduce((a, b) => a + b, 0);
+                            const percentage = (value / total * 100).toFixed(1);
+                            return percentage + '%';
+                        }
                     }
                 }
             }
@@ -332,7 +345,20 @@ function inicializarGraficoBar(alto, medio, bajo) {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: { display: false },
-                    title: { display: false }
+                    title: { display: false },
+                    datalabels: {
+                        anchor: 'center',
+                        align: 'top',
+                        color: '#000',
+                        font: {
+                            weight: 'bold'
+                        },
+                        formatter: (value, context) => {
+                            const data = context.chart.data.datasets[0].data;
+                            const total = data.reduce((a, b) => a + b, 0);
+                            return ((value / total) * 100).toFixed(1) + '%';
+                        }
+                    }
                 },
                 scales: {
                     y: {
@@ -543,3 +569,5 @@ if (token && userRol === 'ADMIN') {
 if (token && userRol === 'USUARIO') {
     inicializarDashboardUsuario();
 }
+
+Chart.register(ChartDataLabels);
