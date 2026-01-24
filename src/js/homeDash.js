@@ -231,7 +231,7 @@ function datosComunes(datos) {
 
     const minProb = Math.round(datos.valorMinimoProbabilidad * 100);
     const maxProb = Math.round(datos.valorMaximoProbabilidad * 100);
-    minMaxProb.textContent = `Valor mínimo: ${minProb}% - Valor máximo: ${maxProb}%`;
+    minMaxProb.textContent = `${minProb}% - ${maxProb}%`;
 
     inicializarGraficoPie(datos.totalCancelara, datos.totalNoCancelara, datos.totalErrorPrediccion);
     inicializarGraficoBar(datos.totalRiesgoAlto, datos.totalRiesgoMedio, datos.totalRiesgoBajo);
@@ -250,6 +250,7 @@ function inicializarGauge(avg) {
         value: avg,
         min: 0,
         max: 100,
+        height: 300,
         title: "Probabilidad de Cancelación",
         label: "%",
         gaugeWidthScale: 1.2,
