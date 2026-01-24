@@ -16,9 +16,9 @@
 
 <body class="login-bg d-flex flex-column align-items-center">
 
-    <div class="container text-center m-5">
-        <img src="/src/public/img/blanco_bgazul.png" class="img-fluid img-login" alt="Logo">
-        <p class="m-2 fs-1 fw-bold text-white">ChurnInsight</p>
+    <div class="container d-flex text-center m-4 justify-content-center align-items-center">
+        <img src="/src/public/img/blanco_bgazul.png" class="img-login" alt="Logo">
+        <p class="ms-4 m-2 fs-1 fw-bold text-white">ChurnInsight</p>
     </div>
 
 
@@ -34,8 +34,7 @@
                 </label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-person"></i></span>
-                    <input type="text" class="form-control" id="user" aria-describedby="inputGroupPrepend"
-                        required>
+                    <input type="text" class="form-control" id="user" aria-describedby="inputGroupPrepend" required>
                 </div>
                 <div id="userInfo" class="form-text ms-1">De 4 a 8 letras o números</div>
                 <div id="userError" class="form-text errorMsg ms-1 text-danger"></div>
@@ -47,8 +46,7 @@
                 </label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-envelope"></i></span>
-                    <input type="email" class="form-control" id="email" aria-describedby="inputGroupPrepend"
-                        required>
+                    <input type="email" class="form-control" id="email" aria-describedby="inputGroupPrepend" required>
                 </div>
                 <div id="emailError" class="errorMsg form-text ms-1 text-danger"></div>
             </div>
@@ -65,7 +63,8 @@
                         <i class="bi bi-eye-fill"></i>
                     </button>
                 </div>
-                <div id="pass1Info" class="form-text ms-1">6 caracteres: mayúscula, una minúscula, un número y un caracter
+                <div id="pass1Info" class="form-text ms-1">6 caracteres: mayúscula, una minúscula, un número y un
+                    caracter
                     especial</div>
                 <div id="pass1Error" class="errorMsg form-text ms-1 text-danger"></div>
             </div>
@@ -113,5 +112,5 @@
     <script type="module" src="/src/js/formUtils.js"></script>
     <script src="/src/js/api.js"></script>
     <script type="module" src="/src/js/auth.js"></script>
-    
+
 </body>
