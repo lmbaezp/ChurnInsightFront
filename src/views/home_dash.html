@@ -16,12 +16,12 @@
 
 </head>
 
-<body id="unautAccess" class="d-flex flex-column justify-content-between min-vh-100">
+<body id="unautAccess" class="d-flex flex-column justify-content-between" style="max-height: 100vh;">
 
     <div class="container-fluid p-0" id="header-navbar"> </div>
 
     <main>
-        <div id="filtrosSmall" class="container mt-4 d-none">
+        <div id="filtrosSmall" class="container-fluid mt-4 d-none">
             <div class="accordion" id="accordionFiltros">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -66,13 +66,13 @@
             </div>
         </div>
 
-        <div class="container w-100">
-            <div class="row">
+        <div class="container-fluid">
+            <div class="row px-lg-3 px-2">
                 <!-- Filtros -->
-                <div id="filtros" class="divFiltros container col-3 mt-4 d-none shadow-lg">
-                    <h3 class="text-center fw-bold border-bottom pb-3 mt-3 mb-5">Filtrar por:</h3>
+                <div id="filtros" class="divFiltros container col-12 col-md-3 mt-4 mb-2 d-none shadow-lg">
+                    <h3 class="text-center fw-bold border-bottom pb-3 mt-3 mb-2">Filtrar por:</h3>
                     <form id="filtros-admin" novalidate>
-                        <div class="pb-3 border-bottom mb-4">
+                        <div class="pb-3 border-bottom mb-2">
                             <label for="usuario">
                                 <h5>Usuario</h5>
                             </label>
@@ -92,7 +92,7 @@
                             <input type="date" class="form-control fechaFin" id="fechaFinBig" name="fechaFin">
                         </div>
                         <button type="submit" id="btn-filtrar"
-                            class="submitFiltros btn btn-primary w-100 mt-3 fw-bold">APLICAR
+                            class="submitFiltros btn btn-primary w-100 fw-bold">APLICAR
                         </button>
                     </form>
                     <button type="btn" id="btn-cleanFiltros"
@@ -100,78 +100,65 @@
                     </button>
                 </div>
                 <!-- Contenido -->
-                <div id="renderContenido" class="col-12 col-md-9 mt-4 mx-auto">
+                <div id="renderContenido" class="col-12 col-md-9 mt-4">
                     <div class="container">
                         <p id="valoresFiltro" class="d-none text-center fw-semibold"></p>
-                        <div class="row g-3">
+                        <div class="row">
                             <!-- Columna izquierda: Cards informativas -->
-                            <div id="cards-datos" class="col-12 col-lg-4 d-flex flex-column justify-content-between">
+                            <div id="cards-datos" class="col-12 col-lg-6 p-0 pe-lg-2 d-flex flex-column justify-content-between">
                                 <!-- Card 1: Número de predicciones -->
                                 <div class="card shadow-sm h-100">
                                     <div class="card-body text-center d-flex flex-column justify-content-between">
-                                        <h6 class="card-title text-primary mb-3">Número de predicciones realizadas</h6>
-                                        <h1 id="numPred" class="display-3 fw-bold mb-3"></h1>
-                                        <p id="fechaPred" class="text-muted mb-0"></p>
+                                        <h6 class="card-title text-primary m-0">Número de predicciones realizadas</h6>
+                                        <p id="numPred" class="fs-3 fw-bold m-0"></p>
+                                        <p id="fechaPred" class="text-muted m-0"></p>
                                     </div>
                                 </div>
-                                <!-- Card 2: Métricas para admin -->
-                                <div id="card-metricas" class="card shadow-sm mt-3 d-none">
-                                    <div class="card-body">
-                                        <div class="row text-center mb-3">
-                                            <div class="col-6 border-end">
-                                                <h6 class="text-primary mb-2">Umbral</h6>
-                                                <h4 class="fw-bold">21,9%</h4>
-                                            </div>
-                                            <div class="col-6">
-                                                <h6 class="text-primary mb-2">Recall</h6>
-                                                <h4 class="fw-bold">80,1%</h4>
-                                            </div>
-                                        </div>
-                                        <div class="text-center pt-3 border-top">
-                                            <p class="mb-0 small text-muted">Algoritmo: XGBoost + Calibrated
-                                                ClassifierCV</p>
-                                        </div>
+                                <!-- Columna derecha: Valores máx y min de proba md-lg size-->
+                                <div class="card shadow-sm h-100 my-2">
+                                    <div class="card-body d-flex flex-column">
+                                        <h6 class="card-title text-primary text-center m-0">Probabilidad Mínima - Probabilida Máxima</h6>
+                                        <!-- <p class="card-title text-primary text-center m-0">Mínima - Máxima</p> -->
+                                        <p id="minMaxProb" class="fs-3 fw-bold my-auto text-center"></p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Columna derecha: Gráfico Gauge -->
-                            <div class="col-12 col-lg-8">
+                            <div class="col-12 col-lg-6 p-0 mb-2">
                                 <div class="card shadow-sm h-100">
-                                    <div class="card-body d-flex flex-column">
+                                    <div class="card-body d-flex flex-column justify-content-between">
                                         <h6 class="card-title text-primary text-center mb-3">Probabilidad promedio de
                                             churn
                                         </h6>
                                         <!-- Contenedor del gauge -->
-                                        <div id="gauge" class="flex-grow-1"></div>
-                                        <!-- Información adicional -->
-                                        <div class="text-center mt-3 pt-3 border-top">
-                                            <p id="minMaxProb" class="mb-0 text-muted"></p>
-                                        </div>
+                                        <div id="gauge" class="gauge mx-auto"></div>
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
 
                     <!-- Gráficos de pie y bar -->
-                    <div class="row container mx-auto mt-3 g-3 p-0">
-                        <div class="col-12 col-md-6">
+                    <div class="row container mx-auto p-0">
+                        <div class="col-12 col-md-6 p-0 pe-md-2 mb-2">
                             <div class="card shadow-sm">
                                 <div class="card-body">
                                     <h6 class="text-center text-muted mb-3">Distribución de predicciones</h6>
-                                    <div style="position: relative; height: 350px;">
+                                    <div style="position: relative; height: 300px;">
                                         <canvas id="myChart"></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 p-0 mb-2">
                             <div class="card shadow-sm">
                                 <div class="card-body">
                                     <h6 class="text-center text-muted mb-3">Riesgo de predicciones</h6>
-                                    <div style="position: relative; height: 350px;">
+                                    <div style="position: relative; height: 300px;">
                                         <canvas id="myChart2"></canvas>
                                     </div>
                                 </div>
