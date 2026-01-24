@@ -391,7 +391,7 @@ window.addEventListener('resize', function () {
 // =================== DASHBOARD ADMIN ===================
 
 async function inicializarDashboardAdmin() {
-    const cardMetricas = document.getElementById('card-metricas');
+    const divContenido = document.getElementById('renderContenido');
     const valoresFiltro = document.getElementById('valoresFiltro');
     const filtroBig = document.getElementById('filtros');
     const filtroSmall = document.getElementById('filtrosSmall');
@@ -419,7 +419,7 @@ async function inicializarDashboardAdmin() {
         try {
             const data = await obtenerLogs();
 
-            cardMetricas?.classList.remove('d-none');
+            divContenido?.classList.remove('w-100');
             valoresFiltro?.classList.add('d-none');
 
             datosComunes(data);
@@ -551,9 +551,11 @@ function agregarBotonDescarga(data, usuario, fechaInicio, fechaFin) {
 
 async function inicializarDashboardUsuario() {
     const userName = getUserName();
+    const divContenido = document.getElementById('renderContenido');
 
     try {
         const data = await obtenerLogsPorUsuario(userName);
+        divContenido?.classList.add('w-100');
         datosComunes(data);
     } catch (error) {
         console.error('Error cargando datos de usuario:', error);
