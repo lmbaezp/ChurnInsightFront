@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
     const formLogin = document.getElementById('form-login');
 
     formLogin?.addEventListener('submit', async (e) => {
@@ -32,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const regexPass = /^[A-Za-z\d!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]{6}$/;
         let hasError = false;
 
-
         if (usuario === '') {
             user_error.innerHTML = `<p class="text-danger fs-6">Campo obligatorio</p>`;
             hasError = true;
@@ -49,11 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (hasError) return;
-
-        let current = JSON.parse(localStorage.getItem('CURRENT_USER') || 'null'); 
-        if (current) {
-            window.location.href = '/src/views/home_dash.html';
-        }
 
         login({ usuario, password })
             .then(data => {
@@ -192,8 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     text: error.message
                 });
             });
-
     });
-
 });
 
