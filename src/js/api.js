@@ -146,11 +146,19 @@ function getTimeUntilExpiration(decodedToken) {
 
 function checkTokenAndRedirect() {
     const token = getValidAuthToken();
+    const currentUser = getCurrentUser();
+    const path = window.location.pathname;
     const content = document.getElementById("unautAccess");
+    const PUBLIC_ROUTES = ['/', '/index.html', '/src/views/signup.html'];
 
     if (!token && content) {
         mostrarMensajeNoAutorizado(content, 'ACCESO NO AUTORIZADO');
         setTimeout(logout, 1000);
+        return;
+    }
+
+    if (PUBLIC_ROUTES.includes(path) && currentUser) {
+        window.location.replace('/src/views/home_dash.html');
         return;
     }
 
@@ -318,12 +326,12 @@ async function obtenerLogsPorUsuario(username) {
 async function filtrarLogs(username, fechaDesde, fechaHasta) {
     if (username === '0') {
         return await fetchAPI(ENDPOINTS.logsFilterByFecha(), {
-        method: 'POST',
-        body: JSON.stringify({
-            fechaDesde: `${fechaDesde}T00:00:00Z`,
-            fechaHasta: `${fechaHasta}T23:59:59Z`
-        })
-    });
+            method: 'POST',
+            body: JSON.stringify({
+                fechaDesde: `${fechaDesde}T00:00:00Z`,
+                fechaHasta: `${fechaHasta}T23:59:59Z`
+            })
+        });
     }
 
     return await fetchAPI(ENDPOINTS.logsFilterByFechaUser(username), {
