@@ -13,9 +13,9 @@ export function formatearNombre(nombre) {
 export function obtenerNivelRiesgo(probabilidad) {
     if (probabilidad < 0.3) {
         return { texto: 'Bajo', clase: 'bg-success' };
-    } else if (probabilidad <= 0.7) {
+    } else if (probabilidad >= 0.3 && probabilidad < 0.6) {
         return { texto: 'Medio', clase: 'bg-warning' };
-    } else {
+    } else if (probabilidad >= 0.6) {
         return { texto: 'Alto', clase: 'bg-danger' };
     }
 }
