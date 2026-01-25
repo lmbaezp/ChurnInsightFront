@@ -556,8 +556,7 @@ async function inicializarDashboardUsuario() {
     try {
         const data = await obtenerLogsPorUsuario(userName);
         divContenido?.classList.add('w-100');
-        const metricas = calcularMetricas(data);
-        datosComunes(metricas);
+        datosComunes(data);
     } catch (error) {
         console.error('Error cargando datos de usuario:', error);
         mostrarError('Error al cargar tus datos');
