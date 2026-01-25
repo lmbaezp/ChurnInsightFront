@@ -292,7 +292,7 @@ async function login(credentials) {
 
         if (response.ok) {
             return await response.json();
-        } else if (response.status == 500) {
+        } else if (response.status == 401) {
             return { error: true, message: 'Credenciales incorrectas' };
         } else {
             const errorText = await response.text();
